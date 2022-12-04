@@ -6,6 +6,7 @@ public class MainGUI {
 
     StartFrame mainFrame;
     AddObs addObsFrame;
+    MyObs myObsFrame;
     SQLManagement manager;
     public MainGUI() {
 
@@ -14,7 +15,7 @@ public class MainGUI {
 
         mainFrame = new StartFrame(this);
         addObsFrame = new AddObs(this, manager);
-
+        myObsFrame = new MyObs(this, manager);
 
 
 
@@ -26,9 +27,13 @@ public class MainGUI {
     private void setAllInvisible() {
         mainFrame.disappear();
         addObsFrame.disappear();
+        myObsFrame.disappear();
     }
 
-
+    public void updateObs(int id) {
+        setAllInvisible();
+        System.out.println("Change obs of id: " + id);
+    }
     public void switchFrame(int num) {
         setAllInvisible();
 
@@ -39,6 +44,10 @@ public class MainGUI {
             case 2:
                 addObsFrame.appear();
                 break;
+            case 3:
+                myObsFrame.appear();
+                break;
+
             default:
                 break;
         }

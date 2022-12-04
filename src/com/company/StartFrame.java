@@ -15,10 +15,19 @@ public class StartFrame {
 
         //Creating a new panel
         JPanel leftPanel = new JPanel();
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 
         JButton button = new JButton("Add Observation");
         button.addActionListener(e -> mainWindow.switchFrame(2));
         leftPanel.add(button);
+
+        JButton myObs = new JButton("My Observations");
+        myObs.addActionListener(e -> mainWindow.switchFrame(3));
+        leftPanel.add(myObs);
+
+
+
+
 
         JPanel topSpace = new JPanel();
         JLabel titleLabel = new JLabel("iGeologist");
