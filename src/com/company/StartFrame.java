@@ -6,7 +6,7 @@ import java.awt.*;
 public class StartFrame {
 
     private JFrame frame;
-    public StartFrame(MainGUI mainWindow) {
+    public StartFrame(GUIManager mainWindow) {
         //Creating the frame
         frame = new JFrame("iGeologist");
 

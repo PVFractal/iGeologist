@@ -7,8 +7,8 @@ public class AddObs {
 
     private JFrame frame;
     private SQLManagement manager;
-    private MainGUI mainWindow;
-    public AddObs(MainGUI mainWindow, SQLManagement m) {
+    private GUIManager mainWindow;
+    public AddObs(GUIManager mainWindow, SQLManagement m) {
         this.mainWindow = mainWindow;
         manager = m;
 
@@ -126,7 +126,7 @@ public class AddObs {
 
     public void addObsButton(int observer, String common_name, boolean wild, double lat, double lon, double set_value) {
         manager.addObservation(observer, common_name, wild, lat, lon, set_value);
-        mainWindow.switchFrame(1);
+        mainWindow.switchFrame(3);
     }
 
 }

@@ -2,21 +2,20 @@ package com.company;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainGUI {
+public class GUIManager {
 
     StartFrame mainFrame;
     AddObs addObsFrame;
     MyObs myObsFrame;
     SQLManagement manager;
-    public MainGUI() {
+    UpdateObs updateObsFrame;
+    public GUIManager() {
 
         manager = new SQLManagement();
-
-
         mainFrame = new StartFrame(this);
         addObsFrame = new AddObs(this, manager);
         myObsFrame = new MyObs(this, manager);
-
+        updateObsFrame = new UpdateObs(this, manager);
 
 
         mainFrame.appear();
@@ -28,11 +27,12 @@ public class MainGUI {
         mainFrame.disappear();
         addObsFrame.disappear();
         myObsFrame.disappear();
+        updateObsFrame.disappear();
     }
 
     public void updateObs(int id) {
         setAllInvisible();
-        System.out.println("Change obs of id: " + id);
+        updateObsFrame.appear(id);
     }
     public void switchFrame(int num) {
         setAllInvisible();

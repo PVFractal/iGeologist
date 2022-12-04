@@ -4,22 +4,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 public class MyObs {
     private JFrame frame;
     private JPanel leftPanel;
     private SQLManagement manager;
-    private MainGUI mainWindow;
+    private GUIManager mainWindow;
     private ArrayList<JPanelComponent> buttonArray;
-    public MyObs(MainGUI mainWindow, SQLManagement m) {
+    public MyObs(GUIManager mainWindow, SQLManagement m) {
         this.mainWindow = mainWindow;
         manager = m;
         buttonArray = new ArrayList<JPanelComponent>();
 
         //Creating the frame
-        frame = new JFrame("Add Observation");
+        frame = new JFrame("My Observations");
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,700);
@@ -61,18 +60,13 @@ public class MyObs {
     }
     private void SetUpButtons() {
 
-
         SQLConnector connector = new SQLConnector();
 
         connector.openConnection();
 
         try {
 
-            ZonedDateTime now = ZonedDateTime.now();
-            String dateString = now.getYear() + ":" + now.getMonthValue() + ":" + now.getDayOfMonth();
-
-
-            String q = "SELECT obs_id, common_name, wild, date FROM Observation WHERE observer = ? ORDER BY date DESC";
+            String q = "SELECT obs_id, common_name, wild, date FROM Observation WHERE observer = ? ORDER BY date DESC LIMIT 15";
             PreparedStatement st = connector.connection().prepareStatement(q);
             st.setInt(1, SQLManagement.OBSERVER_ID);
 
@@ -85,7 +79,7 @@ public class MyObs {
                 Boolean wild = rs.getBoolean("wild");
                 String date = rs.getString("date");
                 int id = rs.getInt("obs_id");
-                String s = id + " " + common_name + ", wild: " + wild.toString() + ", date: " + date;
+                String s = id + " " + common_name + ", wild: " + wild + ", date: " + date;
                 JButton obsButton = new JButton(s);
                 obsButton.addActionListener(e -> mainWindow.updateObs(id));
 
@@ -114,8 +108,12 @@ public class MyObs {
             leftPanel.add(button.comp);
         }
 
+        leftPanel.revalidate();
+        leftPanel.repaint(); // Refresh the left panel
+
     }
     private void RemoveButtons() {
+
         for (JPanelComponent button : buttonArray) {
             leftPanel.remove(button.comp);
         }

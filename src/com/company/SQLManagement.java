@@ -51,4 +51,58 @@ public class SQLManagement {
        connector.closeConnection();
     }
 
+    public void updateObs(int id, String common_name, boolean wild, double lat, double lon, double set_value) {
+        connector.openConnection();
+
+        try {
+
+
+            String q = "UPDATE Observation SET common_name = ?, wild = ?, lat = ?, lon = ?, set_value = ? WHERE obs_id = ?";
+            PreparedStatement st = connector.connection().prepareStatement(q);
+            st.setString(1, common_name);
+            st.setBoolean(2, wild);
+            st.setDouble(3, lat);
+            st.setDouble(4, lon);
+            st.setDouble(5, set_value);
+            st.setInt(6, id);
+
+            st.execute();
+
+            // release resources
+            st.close();
+        }
+        catch(Exception err) {
+            err.printStackTrace();
+        }
+
+
+        connector.closeConnection();
+    }
+
+    public void deleteObs(int id) {
+        connector.openConnection();
+
+        try {
+
+
+            String q = "DELETE FROM Observation WHERE obs_id = ?";
+            PreparedStatement st = connector.connection().prepareStatement(q);
+            st.setInt(1, id);
+
+            st.execute();
+
+            // release resources
+            st.close();
+        }
+        catch(Exception err) {
+            err.printStackTrace();
+        }
+
+
+        connector.closeConnection();
+    }
+
+
+
+
 }
