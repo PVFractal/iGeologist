@@ -3,6 +3,10 @@ package com.company;
 import javax.swing.*;
 import java.awt.*;
 
+/*
+This class holds the starting scene.
+This is more or less the main menu
+ */
 public class StartFrame {
 
     private JFrame frame;
@@ -25,26 +29,37 @@ public class StartFrame {
         myObs.addActionListener(e -> mainWindow.switchFrame(3));
         leftPanel.add(myObs);
 
+        JButton exploreButton = new JButton("Explore");
+        exploreButton.addActionListener(e -> mainWindow.switchFrame(4));
+        leftPanel.add(exploreButton);
 
 
 
 
+        //Panel for containing the header label
         JPanel topSpace = new JPanel();
         JLabel titleLabel = new JLabel("iGeologist");
         titleLabel.setFont(new Font("Serif", Font.BOLD, 30));
         topSpace.add(titleLabel);
 
+        //Adding panels to the frame
         frame.getContentPane().add(BorderLayout.NORTH, topSpace);
         frame.getContentPane().add(BorderLayout.WEST, leftPanel);
     }
 
+
+    /*
+    Makes the scene disappear
+     */
     public void disappear() {
         frame.setVisible(false);
     }
+    /*
+    Makes the scene appear
+     */
     public void appear() {
         frame.setVisible(true);
     }
-
 
 
 }

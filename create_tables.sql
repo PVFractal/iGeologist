@@ -10,7 +10,6 @@ Drop Table If Exists User;
 Drop Table If Exists Project;
 
 
-
 Create Table Project (
     proj_id INT UNSIGNED,
     name TINYTEXT NOT NULL,

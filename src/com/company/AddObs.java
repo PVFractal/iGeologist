@@ -8,7 +8,13 @@ public class AddObs {
     private JFrame frame;
     private SQLManagement manager;
     private GUIManager mainWindow;
+
+    /*
+    This is the add observation scene
+     */
     public AddObs(GUIManager mainWindow, SQLManagement m) {
+
+        //Sets class variables
         this.mainWindow = mainWindow;
         manager = m;
 
@@ -24,6 +30,7 @@ public class AddObs {
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 
 
+        //Adding components
         JLabel suggest_id_label = new JLabel("Suggested ID:");
         suggest_id_label.setAlignmentX(Component.LEFT_ALIGNMENT);
         leftPanel.add(suggest_id_label);
@@ -76,7 +83,7 @@ public class AddObs {
         leftPanel.add(lonPanel);
 
 
-
+        //More components
         JLabel est_val_label = new JLabel("Estimated Value:");
         est_val_label.setAlignmentX(Component.LEFT_ALIGNMENT);
         leftPanel.add(est_val_label);
@@ -87,7 +94,7 @@ public class AddObs {
         leftPanel.add(estimated_value);
 
 
-
+        //This acts as a small spacer between everything and the "add" button
         leftPanel.add(Box.createVerticalStrut(50));
 
 
@@ -112,18 +119,26 @@ public class AddObs {
         topSpace.add(titleLabel);
 
 
-
+        //Adds the panels to the frame
         frame.getContentPane().add(BorderLayout.NORTH, topSpace);
         frame.getContentPane().add(BorderLayout.WEST, leftPanel);
     }
 
+    /*
+    Makes the scene disappear
+     */
     public void disappear() {
         frame.setVisible(false);
     }
+    /*
+    Makes the scene appear
+     */
     public void appear() {
         frame.setVisible(true);
     }
-
+    /*
+    This calls the "add observation" function in the SQL manager, and switches the scene
+     */
     public void addObsButton(int observer, String common_name, boolean wild, double lat, double lon, double set_value) {
         manager.addObservation(observer, common_name, wild, lat, lon, set_value);
         mainWindow.switchFrame(3);

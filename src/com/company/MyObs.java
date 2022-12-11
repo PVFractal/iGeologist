@@ -13,9 +13,10 @@ public class MyObs {
     private GUIManager mainWindow;
     private ArrayList<JPanelComponent> buttonArray;
     public MyObs(GUIManager mainWindow, SQLManagement m) {
+        //Sets class variables
         this.mainWindow = mainWindow;
         manager = m;
-        buttonArray = new ArrayList<JPanelComponent>();
+        buttonArray = new ArrayList<>();
 
         //Creating the frame
         frame = new JFrame("My Observations");
@@ -29,35 +30,42 @@ public class MyObs {
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 
 
-
-
-
-
+        //Top panel
         JPanel topSpace = new JPanel();
         JLabel titleLabel = new JLabel("My Observations");
         titleLabel.setFont(new Font("Serif", Font.BOLD, 20));
         topSpace.add(titleLabel);
 
+        //Right panel for back button
         JPanel rightSpace = new JPanel();
         JButton back = new JButton("Back");
         back.addActionListener(e -> mainWindow.switchFrame(1));
         rightSpace.add(back);
 
-
+        //Assigning panels to diffferent parts of the frame
         frame.getContentPane().add(BorderLayout.EAST, rightSpace);
         frame.getContentPane().add(BorderLayout.NORTH, topSpace);
         frame.getContentPane().add(BorderLayout.WEST, leftPanel);
     }
 
+    /*
+    Makes the scene disappear
+     */
     public void disappear() {
         frame.setVisible(false);
     }
+    /*
+    Makes the scene appear
+     */
     public void appear() {
         frame.setVisible(true);
         RemoveButtons();
 
         SetUpButtons();
     }
+    /*
+    Gets sql data for a user, and creates buttons for the most recent of their observations
+     */
     private void SetUpButtons() {
 
         SQLConnector connector = new SQLConnector();
@@ -65,7 +73,7 @@ public class MyObs {
         connector.openConnection();
 
         try {
-
+            //Limits the number to 15, since that's about how many buttons fit on the screen
             String q = "SELECT obs_id, common_name, wild, date FROM Observation WHERE observer = ? ORDER BY date DESC LIMIT 15";
             PreparedStatement st = connector.connection().prepareStatement(q);
             st.setInt(1, SQLManagement.OBSERVER_ID);
@@ -73,7 +81,7 @@ public class MyObs {
             ResultSet rs = st.executeQuery();
 
 
-            // print the result
+            ///Gets the result and creates buttons from them
             while(rs.next()) {
                 String common_name = rs.getString("common_name");
                 Boolean wild = rs.getBoolean("wild");
@@ -86,13 +94,13 @@ public class MyObs {
                 JPanelComponent newComponent =  new JPanelComponent();
                 newComponent.id = id;
                 newComponent.comp = obsButton;
+                //Adds the button to the button array. This will be used for removing buttons
                 buttonArray.add(newComponent);
             }
 
 
-            rs.close();
-
             // release resources
+            rs.close();
             st.close();
         }
         catch(Exception err) {
@@ -103,15 +111,19 @@ public class MyObs {
         connector.closeConnection();
 
 
-
+        //Adds all the buttons to the panel
         for (JPanelComponent button : buttonArray) {
             leftPanel.add(button.comp);
         }
 
+        // Refresh the left panel
         leftPanel.revalidate();
-        leftPanel.repaint(); // Refresh the left panel
+        leftPanel.repaint();
 
     }
+    /*
+    Removes all the buttons from the array and panel
+     */
     private void RemoveButtons() {
 
         for (JPanelComponent button : buttonArray) {
