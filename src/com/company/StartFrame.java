@@ -33,6 +33,15 @@ public class StartFrame {
         exploreButton.addActionListener(e -> mainWindow.switchFrame(4));
         leftPanel.add(exploreButton);
 
+        JButton marketButton = new JButton("Sell Your Rocks");
+        marketButton.addActionListener(e -> mainWindow.switchFrame(5));
+        leftPanel.add(marketButton);
+
+        JButton saleButton = new JButton("View Rocks On Sale");
+        saleButton.addActionListener(e -> mainWindow.switchFrame(6));
+        leftPanel.add(saleButton);
+
+
 
 
 

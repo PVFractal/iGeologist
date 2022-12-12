@@ -15,6 +15,9 @@ public class GUIManager {
     UpdateObs updateObsFrame;
     Explore exploreFrame;
     ViewObs viewFrame;
+    Market marketFrame;
+    SellObs sellFrame;
+    ForSale saleFrame;
 
     public GUIManager() {
 
@@ -26,6 +29,9 @@ public class GUIManager {
         updateObsFrame = new UpdateObs(this, manager);
         exploreFrame = new Explore(this, manager);
         viewFrame = new ViewObs(this, manager);
+        marketFrame = new Market(this, manager);
+        sellFrame = new SellObs(this, manager);
+        saleFrame = new ForSale(this, manager);
 
         //This makes the starting frame appear
         mainFrame.appear();
@@ -42,6 +48,9 @@ public class GUIManager {
         updateObsFrame.disappear();
         exploreFrame.disappear();
         viewFrame.disappear();
+        marketFrame.disappear();
+        sellFrame.disappear();
+        saleFrame.disappear();
     }
 
 
@@ -55,6 +64,10 @@ public class GUIManager {
     public void viewObs(int id) {
         setAllInvisible();
         viewFrame.appear(id);
+    }
+    public void sellObs(int id) {
+        setAllInvisible();
+        sellFrame.appear(id);
     }
 
     /*
@@ -75,6 +88,12 @@ public class GUIManager {
                 break;
             case 4:
                 exploreFrame.appear();
+                break;
+            case 5:
+                marketFrame.appear();
+                break;
+            case 6:
+                saleFrame.appear();
                 break;
 
 
