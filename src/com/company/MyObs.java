@@ -12,6 +12,11 @@ public class MyObs {
     private SQLManagement manager;
     private GUIManager mainWindow;
     private ArrayList<JPanelComponent> buttonArray;
+
+
+    /*
+    This scene allows you to see your observations, and pick ones to update/delete
+     */
     public MyObs(GUIManager mainWindow, SQLManagement m) {
         //Sets class variables
         this.mainWindow = mainWindow;

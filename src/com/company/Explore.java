@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+/*
+This class makes the explore scene, where you can search for observations and filter them.
+ */
 public class Explore {
     private JFrame frame;
     private SQLManagement manager;

@@ -10,7 +10,7 @@ public class SellObs {
     private int id;
 
     /*
-    This is the add observation scene
+    This allows you to sell an observation for a specified price
      */
     public SellObs(GUIManager mainWindow, SQLManagement m) {
 

@@ -26,7 +26,7 @@ public class ForSale {
 
 
     /*
-    This is the add observation scene
+    This is the scene for looking at minerals on sale
      */
     public ForSale(GUIManager mainWindow, SQLManagement m) {
 

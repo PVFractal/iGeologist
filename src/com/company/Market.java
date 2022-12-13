@@ -12,6 +12,10 @@ public class Market {
     private SQLManagement manager;
     private GUIManager mainWindow;
     private ArrayList<JPanelComponent> buttonArray;
+
+    /*
+    This scene lets you pick an observation to sell
+     */
     public Market(GUIManager mainWindow, SQLManagement m) {
         //Sets class variables
         this.mainWindow = mainWindow;
